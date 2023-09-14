@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "node node_modules/rimraf/dist/mjs/index.js ./build && tsc",
+    "build": "node node_modules/rimraf/dist/cjs/src/index.js ./build && tsc",
     "exec": "node --es-module-specifier-resolution=node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

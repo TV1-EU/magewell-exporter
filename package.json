@@ -1,0 +1,25 @@
+{
+  "name": "magewell-exporter",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "exec": "node --es-module-specifier-resolution=node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Daichendt",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "prettier": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
+  }
+}

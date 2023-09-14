@@ -11,4 +11,4 @@ docker_build:
   script:
     - docker login gitlab.r53.cdn.tv1.eu:4567
     - docker build -t gitlab.r53.cdn.tv1.eu:4567/devops/magewell-exporter:latest .
-    - docker push gitlab.r53.cdn.tv1.eu:4567/magewell-exporter:latest
+    - docker push gitlab.r53.cdn.tv1.eu:4567/devops/magewell-exporter:latest

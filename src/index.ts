@@ -30,9 +30,9 @@ server.on("request", async (request, res) => {
 
     const url = new URL(request.url || "", `http://${request.headers.host}`);
 
-    if (url.pathname === "/metrics") {
+    if (url.pathname === "/probe") {
         // get probe parameter
-        const probe = url.searchParams.get("probe");
+        const probe = url.searchParams.get("target");
 
         if (!probe) {
             res.writeHead(400, { "Content-Type": "text/plain" });

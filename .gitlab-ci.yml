@@ -16,4 +16,5 @@ docker_build:
     - docker build -t $REGISTRY_IMAGE .
     - docker image tag "$REGISTRY_IMAGE:latest" "$REGISTRY_IMAGE:$VERSION"
     - docker push $REGISTRY_IMAGE:latest
+    - docker push $REGISTRY_IMAGE:$VERSION
 

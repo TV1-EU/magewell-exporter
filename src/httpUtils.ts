@@ -4,7 +4,7 @@ import { URL } from 'url';
 function HttpUtils() { }
 
 export type Options = { headers?: http.OutgoingHttpHeaders, timeout?: number }
-// get
+
 HttpUtils.prototype.get = function (url: string, options: Options = {}) {
     return new Promise((resolve, reject) => {
         const urlInfo = new URL(url)
@@ -51,76 +51,5 @@ HttpUtils.prototype.get = function (url: string, options: Options = {}) {
         })
     })
 }
-
-// // upload
-// HttpUtils.prototype.upload = function (url, filePath, options = {}) {
-
-//     return new Promise((resolve, reject) => {
-//         const urlInfo = new URL(url)
-
-//         const boundaryKey = '----WebKitFormBoundarypQg2o6On0TJpWqIk';
-//         const opts = {
-//             hostname: urlInfo.hostname,
-//             path: urlInfo.pathname + urlInfo.search,
-//             port: urlInfo.port || 80,
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'multipart/form-data; boundary=' + boundaryKey,
-//                 'Cookie': options.headers.Cookie
-//             }
-//         }
-
-//         //read file
-//         fs.readFile(filePath, function (err, data) {
-
-//             if (err) {
-//                 reject(err);
-//                 return false;
-//             }
-
-//             //"multipart/form-data" encoding, see https://www.w3.org/TR/html4/interact/forms.html#didx-multipartform-data
-//             let payloadStart = `--${boundaryKey}\r\n`;
-//             payloadStart += `Content-Disposition: form-data; name="file"; filename="${path.basename(filePath)}"\r\n`;
-//             payloadStart += 'Content-Type: application/octet-stream\r\n\r\n';
-
-//             let payloadEnd = '\r\n--';
-//             payloadEnd += boundaryKey + '--\r\n';
-
-//             // to Buffer
-//             const payloadBufStart = Buffer.from(payloadStart);
-//             const payloadBufEnd = Buffer.from(payloadEnd);
-
-//             // payloadBufStart + data + payloadBufEnd
-//             const payloadBufs = [payloadBufStart, data, payloadBufEnd];
-//             const payloadBuf = Buffer.concat(payloadBufs);
-
-//             const payloadLength = Buffer.byteLength(payloadBuf);
-
-//             const req = http.request(opts, (res) => {
-//                 let resData = '';
-//                 res.setEncoding('utf8');
-//                 res.on('data', (chunk) => {
-//                     resData += chunk;
-//                 });
-//                 res.on('end', () => {
-//                     try {
-//                         resolve(JSON.parse(resData));
-//                     } catch (err) {
-//                         reject(resData);
-//                     }
-
-//                 });
-//             });
-
-//             req.on('error', (e) => {
-//                 reject(e.message);
-//             });
-
-//             req.setHeader('Content-Length', payloadLength);
-//             req.write(payloadBuf);
-//             req.end();
-//         });
-//     });
-// }
 
 export default HttpUtils

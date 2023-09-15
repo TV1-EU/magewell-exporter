@@ -1,5 +1,8 @@
 stages:
   - build
+variables:
+  GITLAB_URL: gitlab.r53.cdn.tv1.eu:4567
+  REGISTRY_IMAGE: $GITLAB_URL/devops/magewell-exporter
 
 docker_build:
   stage: build
@@ -7,8 +10,10 @@ docker_build:
   services:
     - docker:dind
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN gitlab.r53.cdn.tv1.eu:4567
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $GITLAB_URL
   script:
-    - docker login gitlab.r53.cdn.tv1.eu:4567
-    - docker build -t gitlab.r53.cdn.tv1.eu:4567/devops/magewell-exporter:latest .
-    - docker push gitlab.r53.cdn.tv1.eu:4567/devops/magewell-exporter:latest
+    - export VERSION=$(docker run --rm -v "$PWD":/app:ro -w /app node:slim node -p "require('./package.json').version")
+    - docker build -t $REGISTRY_IMAGE .
+    - docker image tag "$REGISTRY_IMAGE:latest" "$REGISTRY_IMAGE:$VERSION"
+    - docker push $REGISTRY_IMAGE:latest
+

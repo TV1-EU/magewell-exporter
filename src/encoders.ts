@@ -19,13 +19,17 @@ export function init(ips: string[]) {
 const statusURL = (deviceIP: string) => `http://${deviceIP}/usapi?method=get-status`;
 
 export async function getData(deviceIP: string) {
-    const { data } = await httpUtils.get(statusURL(deviceIP), {
-        headers: {
-            'Cookie': encoders.find((encoder) => encoder.ip === deviceIP)?.cookie
-        }
-    })
+    try {
+        const { data } = await httpUtils.get(statusURL(deviceIP), {
+            headers: {
+                'Cookie': encoders.find((encoder) => encoder.ip === deviceIP)?.cookie
+            }
+        })
 
-    return data as MagewellStatus;
+        return data as MagewellStatus;
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 

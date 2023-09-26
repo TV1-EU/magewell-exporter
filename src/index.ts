@@ -43,6 +43,13 @@ server.on("request", async (request, res) => {
 
         const data = await getData(probe || "");
 
+        if (!data) {
+            res.writeHead(500, { "Content-Type": "text/plain" });
+            res.write("Not Accessible");
+            res.end();
+            return;
+        }
+
         // send data to client
         res.writeHead(200, { "Content-Type": "text/plain" });
 

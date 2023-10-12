@@ -3,6 +3,8 @@ stages:
 variables:
   GITLAB_URL: gitlab.r53.cdn.tv1.eu:4567
   REGISTRY_IMAGE: $GITLAB_URL/devops/magewell-exporter
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
 
 docker_build:
   stage: build

@@ -30,7 +30,7 @@ const loginAll = () => {
 loginAll();
 
 // execute loginAll every 6hr
-setInterval(loginAll, 1 * 60 * 60 * 1000);
+setInterval(loginAll, 6 * 60 * 60 * 1000);
 
 // start metrics endpoint
 const server = http.createServer();

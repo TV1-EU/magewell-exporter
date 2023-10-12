@@ -11,6 +11,7 @@ const encoders: {
 }[] = [];
 
 export function init(ips: string[]) {
+    encoders.length = 0;
     ips.forEach((ip) => {
         encoders.push({ ip, cookie: [] });
     });

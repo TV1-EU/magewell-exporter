@@ -15,13 +15,22 @@ const zip = <T>(arr: T[], ...arrs: T[][]): T[][] => {
     return arr.map((val, i) => arrs.reduce((a, arr) => [...a, arr[i]], [val]));
 };
 
-zip(deviceIPs, userNames, passwords).forEach(
-    ([deviceIP, userName, password]: string[]) => {
-        login(deviceIP, userName, password);
-    }
-);
+const loginAll = () => {
 
-init(deviceIPs);
+    init(deviceIPs);
+
+    zip(deviceIPs, userNames, passwords).forEach(
+        ([deviceIP, userName, password]: string[]) => {
+            console.log(`Logging in to ${deviceIP}`)
+            login(deviceIP, userName, password);
+        }
+    );
+}
+
+loginAll();
+
+// execute loginAll every 6hr
+setInterval(loginAll, 1 * 60 * 60 * 1000);
 
 // start metrics endpoint
 const server = http.createServer();
@@ -64,5 +73,5 @@ server.on("request", async (request, res) => {
 });
 
 const port = process.env.PORT || 8483;
-console.log("Server running on port " + port);
+console.log("Server running on http://localhost:" + port);
 server.listen(port);

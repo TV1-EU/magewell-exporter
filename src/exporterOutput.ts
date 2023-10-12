@@ -24,7 +24,7 @@ function addMetric(name: string, help?: string, params?: string, type: "gauge" |
 
 export default function format(data: MagewellStatus) {
 
-    if (!data) {
+    if (!data || !data["box-name"]) {
         return "";
     }
 

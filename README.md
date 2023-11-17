@@ -32,3 +32,4 @@ npm run exec
 
 - On startup, the exporter logs in to all encoders to fetch the auth cookies. Subsequent requests are made with these cookies.
 - CI automatically builds and pushes a docker image to gitlab.
+- this repository is automatically synced to github https://github.com/TV1-EU/
